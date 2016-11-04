@@ -1,0 +1,110 @@
+DROP DATABASE IF EXISTS p2p;
+CREATE DATABASE p2p;
+USE p2p;
+
+DROP TABLE IF EXISTS users;
+CREATE TABLE users(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	last_name VARCHAR(255) NOT NULL,
+	first_name VARCHAR(255) NOT NULL,
+	middle_initial VARCHAR(255),
+	mobile_number VARCHAR(255) NOT NULL,
+	password VARCHAR(255) NOT NULL,
+	is_admin BOOLEAN,
+	user_type INT
+);
+
+INSERT INTO users (last_name, first_name,middle_initial,mobile_number,password,is_admin)
+VALUES 
+	('Domingo','Nikki','N','0917','password', TRUE),
+	('Impuerto','Mars','', '0917','password', FALSE),
+	('Salumbides','Katkat','N','0917','password',FALSE),
+	('Andan', 'JC', '', '0917', 'password', FALSE),
+	('Natividad', 'Carlo', 'M', '0917', 'password', FALSE),
+	('Park', 'Candy', 'H', '0917', 'password',FALSE),
+	('Bermejo', 'Irene', 'Y', '0917', 'password', FALSE);
+
+DROP TABLE IF EXISTS loyolaschools;
+CREATE TABLE loyolaschools(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	ls_id_number VARCHAR(255) NOT NULL,
+	obf_email VARCHAR(255) NOT NULL
+);
+
+INSERT INTO loyolaschools (ls_id_number, obf_email)
+VALUES
+	('141370', 'jc.andan@obf.ateneo.edu'),
+	('141371', 'carlo.natividad@obf.ateneo.edu');
+
+DROP TABLE IF EXISTS staffs;
+CREATE TABLE staffs(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	staff_id_number VARCHAR(255) NOT NULL,
+	ateneo_email VARCHAR(255) NOT NULL
+);
+
+INSERT INTO staffs (staff_id_number, ateneo_email)
+VALUES
+	('1234', 'impuerto@ateneo.edu'),
+	('1245', 'salumbides@ateneo.edu');
+
+DROP TABLE IF EXISTS highschools;
+CREATE TABLE highschools(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	hs_id_number VARCHAR(255) NOT NULL,
+	grade_level VARCHAR(255),
+	section VARCHAR(255),
+	guardian_name VARCHAR(255),
+	guardian_mobile_number VARCHAR(255)
+);
+
+INSERT INTO highschools(hs_id_number, grade_level,section,guardian_name,guardian_mobile_number)
+VALUES
+	('00123', '12', 'A', 'Willard', '0915'),
+	('00124', '11', 'B', 'JJ', '0913');
+
+DROP TABLE IF EXISTS locations;
+CREATE TABLE locations(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	name VARCHAR(255) NOT NULL
+);
+
+DROP TABLE IF EXISTS timeslots;
+CREATE TABLE timeslots(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	time_slot TIME NOT NULL
+);
+
+DROP TABLE IF EXISTS slots;
+CREATE TABLE slots(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	date_slots DATETIME,
+	location_id INT,	
+	is_pickup BOOLEAN,
+	is_dropoff BOOLEAN,
+	timeslot_id INT,
+	num_of_seats INT NOT NULL,
+	-- num_of_available_seats INT,
+	status VARCHAR(255),
+	FOREIGN KEY (location_id) REFERENCES locations(id),
+	FOREIGN KEY (timeslot_id) REFERENCES timeslots(id)
+);
+
+DROP TABLE IF EXISTS reservations;
+CREATE TABLE reservations(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	user_id INT NOT NULL,
+	slot_id INT NOT NULL,
+	comment VARCHAR(255),
+	-- num_of_children INT,
+	num_of_passengers INT,
+	FOREIGN KEY (user_id) REFERENCES users(id),
+	FOREIGN KEY (slot_id) REFERENCES slots(id)
+);
+
+-- LOAD DATA INFILE 'loyolaschools-data.csv' 
+-- INTO TABLE loyolaschools
+-- FIELDS TERMINATED BY ','
+-- ENCLOSED BY '"'
+-- LINES TERMINATED BY '\n'
+-- (ls_id_number, obf_email);
