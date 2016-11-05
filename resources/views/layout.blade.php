@@ -8,7 +8,10 @@
 
 	<!-- INSERT ALL UNIVERSAL STYLE COMPONENTS BELOW -->
 	<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-	<style>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+
+<!-- 	<style>
         html, body {
             background-color: #fff;
             color: #636b6f;
@@ -18,12 +21,16 @@
             margin: 0;
         }
 	</style>
-
+ -->
 </head>
 
 <body>
 
-	@yield('content')
+    <div class="container">
+
+	   @yield('content')
+
+    </div>  
 
 </body>
 

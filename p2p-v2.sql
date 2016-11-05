@@ -69,11 +69,23 @@ CREATE TABLE locations(
 	name VARCHAR(255) NOT NULL
 );
 
+INSERT INTO locations(name)
+VALUES
+	('UP TechnoHub'),
+	('SM Markina'),
+	('Temple Drive');
+
 DROP TABLE IF EXISTS timeslots;
 CREATE TABLE timeslots(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	time_slot TIME NOT NULL
 );
+
+INSERT INTO timeslots(time_slot)
+VALUES
+	('06:15:00'),
+	('06:45:00'),
+	('07:15:00');
 
 DROP TABLE IF EXISTS slots;
 CREATE TABLE slots(
@@ -90,17 +102,28 @@ CREATE TABLE slots(
 	FOREIGN KEY (timeslot_id) REFERENCES timeslots(id)
 );
 
+INSERT INTO slots (location_id,is_pickup,is_dropoff, timeslot_id,num_of_seats)
+VALUES
+	(1, TRUE, FALSE, 1, 50),
+	(2, FALSE, TRUE, 2, 40),
+	(3, TRUE, FALSE, 1, 30);
+
 DROP TABLE IF EXISTS reservations;
 CREATE TABLE reservations(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	user_id INT NOT NULL,
 	slot_id INT NOT NULL,
 	comment VARCHAR(255),
-	-- num_of_children INT,
 	num_of_passengers INT,
 	FOREIGN KEY (user_id) REFERENCES users(id),
 	FOREIGN KEY (slot_id) REFERENCES slots(id)
 );
+
+INSERT INTO reservations(user_id, slot_id, comment, num_of_passengers)
+VALUES
+	(2,1,"Mars' Reservation #1", 1),
+	(2,2,"Mars' Reservations #2", 1),
+	(3,2,"Katkat's Reservation #1", 2);
 
 -- LOAD DATA INFILE 'loyolaschools-data.csv' 
 -- INTO TABLE loyolaschools

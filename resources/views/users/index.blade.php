@@ -4,11 +4,9 @@
 
 	<h1>List of All Users</h1>
 
-	<ul>
+	<ul class="list-group">
 		@foreach ($users as $user)
-
-			<!-- <li> {{ $user->last_name }}  </li> -->
-			<li> <a href="/users/{{$user->id}}"> {{ $user->last_name }}  </a></li>
+			<li class="list-group-item"> <a href="/users/{{$user->id}}"> {{ $user->last_name }}  </a></li>
 		@endforeach
 	</ul>
 
