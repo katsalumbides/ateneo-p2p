@@ -10,7 +10,7 @@ CREATE TABLE users(
 	middle_initial VARCHAR(255),
 	mobile_number VARCHAR(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
-	is_admin BOOLEAN,
+	is_admin BOOLEAN DEFAULT 0,
 	user_type INT
 );
 

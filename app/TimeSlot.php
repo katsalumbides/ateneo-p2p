@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class TimeSlot extends Model
+class Timeslot extends Model
 {
     public function slots(){
     	return $this->hasMany(Slots::class);

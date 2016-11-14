@@ -18,3 +18,15 @@ Route::get('/', function () {
 Route::get('users', 'UsersController@index');
 
 Route::get('users/{user}', 'UsersController@show');
+
+Route::get('/home', 'HomeController@index');
+
+
+//Register Routes
+Auth::routes();
+
+Route::get('/register/validate', function() { return view('auth.faculty'); });
+
+Route::post('/register/validate', 'Auth\RegisterController@chooseFaculty');
+
+Route::post('/register/validate/{user_type}', 'Auth\RegisterController@validateUser');
