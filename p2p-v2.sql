@@ -12,7 +12,11 @@ CREATE TABLE users(
 	password VARCHAR(255) NOT NULL,
 	is_admin BOOLEAN DEFAULT 0,
 	email VARCHAR(255),
-	user_type INT
+	user_type INT,
+	remember_token VARCHAR(100),
+	created_at timestamp NULL,
+	updated_at timestamp NULL
+
 );
 
 INSERT INTO users (last_name, first_name, middle_initial, mobile_number, password, is_admin, email)
@@ -33,9 +37,10 @@ CREATE TABLE loyolaschools(
 );
 
 INSERT INTO loyolaschools (ls_id_number, obf_email)
-VALUES
+VALUES 
 	('141370', 'jc.andan@obf.ateneo.edu'),
-	('141371', 'carlo.natividad@obf.ateneo.edu');
+	('141371', 'carlo.natividad@obf.ateneo.edu'),
+	('141372', 'anton.suba@obf.ateneo.edu');
 
 DROP TABLE IF EXISTS staffs;
 CREATE TABLE staffs(
