@@ -25,8 +25,8 @@ Route::get('/home', 'HomeController@index');
 //Register Routes
 Auth::routes();
 
-Route::get('/register/validate', function() { return view('auth.faculty'); });
+Route::get('/register/faculty', function() { return view('auth.faculty'); });
 
-Route::post('/register/validate', 'Auth\RegisterController@chooseFaculty');
+Route::get('/register/validate', 'Auth\RegisterController@chooseFaculty');
 
-Route::post('/register/validate/{user_type}', 'Auth\RegisterController@validateUser');
+Route::post('/register/{user_type}', 'Auth\RegisterController@validateUser');

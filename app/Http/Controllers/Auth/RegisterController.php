@@ -3,6 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\loyolaschool;
+use App\Highschool;
+use App\Staffs;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -50,7 +54,7 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => 'required|max:255',
             'last_name' => 'required|max:255',
-            // 'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
         ]);
     }
@@ -69,24 +73,52 @@ class RegisterController extends Controller
             'middle_initial' => $data['middle_initial'],
             'mobile_number' => $data['mobile_number'],
             'user_type' => $data['user_type'],
-            //'email' => $data['email'],
+            'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
     }
 
-     public function chooseFaculty(){
+    public function chooseFaculty(){
         $user_type = request()->user_type;
 
         return view('auth.validate', compact('user_type'));
     }
 
-    public function validateUser($user_type){
+    public function validateUser(Request $request, $user_type){
+
         if ($user_type == 0){
-            # code...
+
+            $this->validate($request, [
+                'hs_id_number' => 'exists:highschools,hs_id_number',
+                'grade_level' => 'exists:highschools,grade_level',
+                'section' => 'exists:highschools,section',
+            ]);
+
+            $hs_student = Highschool::where('hs_id_number', $request->hs_id_number)->first();
+            $hs_student->guardian_name = $request->guardian_name;
+            $hs_student->guardian_email = $request->guardian_email;
+            $hs_student->guardian_mobile_number = $request->guardian_mobile_number;
+            $hs_student->save();
+
         } elseif ($user_type == 1) {
-            # code...
+
+            $this->validate($request, [
+                'ls_id_number' => 'exists:loyolaschools,ls_id_number',
+                'obf_email' => 'exists:loyolaschools,obf_email',
+            ]);
+
         } elseif ($user_type == 2) {
-            # code...
+            
+            $this->validate($request, [
+                'staff_id_number' => 'exists:staffs,staff_id_number',
+                'ateneo_email' => 'exists:staffs,ateneo_email',
+            ]);
+
+            $staffs = Staffs::where('staff_id_number',$request->staff_id_number)->first();
+            $staffs->department = $request->department;
+            $staffs->unit = $request->unit;
+            $staffs->save();
+
         }
 
         return view('auth.register', compact('user_type'));

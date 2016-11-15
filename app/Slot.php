@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slot extends Model
 {
+    public $timestamps = false;
+
     public function reservations(){
     	return $this->hasMany(Reservation::class);
     }

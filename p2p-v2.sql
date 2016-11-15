@@ -11,18 +11,19 @@ CREATE TABLE users(
 	mobile_number VARCHAR(255) NOT NULL,
 	password VARCHAR(255) NOT NULL,
 	is_admin BOOLEAN DEFAULT 0,
+	email VARCHAR(255),
 	user_type INT
 );
 
-INSERT INTO users (last_name, first_name,middle_initial,mobile_number,password,is_admin)
+INSERT INTO users (last_name, first_name, middle_initial, mobile_number, password, is_admin, email)
 VALUES 
-	('Domingo','Nikki','N','0917','password', TRUE),
-	('Impuerto','Mars','', '0917','password', FALSE),
-	('Salumbides','Katkat','N','0917','password',FALSE),
-	('Andan', 'JC', '', '0917', 'password', FALSE),
-	('Natividad', 'Carlo', 'M', '0917', 'password', FALSE),
-	('Park', 'Candy', 'H', '0917', 'password',FALSE),
-	('Bermejo', 'Irene', 'Y', '0917', 'password', FALSE);
+	('Domingo','Nikki','N','0917', 'password', TRUE, 'nikki@nikki.com'),
+	('Impuerto','Mars','', '0917','password', FALSE, 'mars@mars.com'),
+	('Salumbides','Katkat','N','0917','password',FALSE, 'kat@kat.com'),
+	('Andan', 'JC', '', '0917','password', FALSE, 'jc@jc.com'),
+	('Natividad', 'Carlo', 'M', '0917','password', FALSE, 'carlo@carlo.com'),
+	('Park', 'Candy', 'H', '0917','password',FALSE, 'candy@candy.com'),
+	('Bermejo', 'Irene', 'Y', '0917', 'password', FALSE, 'irene@irene.com');
 
 DROP TABLE IF EXISTS loyolaschools;
 CREATE TABLE loyolaschools(
@@ -40,7 +41,9 @@ DROP TABLE IF EXISTS staffs;
 CREATE TABLE staffs(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	staff_id_number VARCHAR(255) NOT NULL,
-	ateneo_email VARCHAR(255) NOT NULL
+	ateneo_email VARCHAR(255) NOT NULL,
+	unit VARCHAR(255),
+	department VARCHAR(255)
 );
 
 INSERT INTO staffs (staff_id_number, ateneo_email)
@@ -52,16 +55,20 @@ DROP TABLE IF EXISTS highschools;
 CREATE TABLE highschools(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	hs_id_number VARCHAR(255) NOT NULL,
-	grade_level VARCHAR(255),
-	section VARCHAR(255),
+	grade_level VARCHAR(255) NOT NULL,
+	section VARCHAR(255) NOT NULL,
 	guardian_name VARCHAR(255),
+	guardian_email VARCHAR(255),
 	guardian_mobile_number VARCHAR(255)
 );
 
-INSERT INTO highschools(hs_id_number, grade_level,section,guardian_name,guardian_mobile_number)
+INSERT INTO highschools(hs_id_number, grade_level,section)
 VALUES
-	('00123', '12', 'A', 'Willard', '0915'),
-	('00124', '11', 'B', 'JJ', '0913');
+	('00123', '12', 'A'),
+	('00124', '11', 'B');
+
+		-- ('00123', '12', 'A', 'Willard', '0915'),
+	-- ('00124', '11', 'B', 'JJ', '0913');
 
 DROP TABLE IF EXISTS locations;
 CREATE TABLE locations(
