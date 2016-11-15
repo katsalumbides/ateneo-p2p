@@ -17,9 +17,13 @@ Route::get('/', function () {
 
 Route::get('users', 'UsersController@index');
 
-Route::get('users/{user}', 'UsersController@show');
+// Route::get('users/{user}', 'UsersController@show');
 
 Route::get('/home', 'HomeController@index');
+
+Route::get('/profile', 'ReservationsController@show');
+
+Route::get('/profile/{reservation}', 'ReservationsController@delete');
 
 
 //Register Routes

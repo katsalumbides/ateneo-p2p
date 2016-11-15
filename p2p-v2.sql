@@ -19,15 +19,15 @@ CREATE TABLE users(
 
 );
 
-INSERT INTO users (last_name, first_name, middle_initial, mobile_number, password, is_admin, email)
-VALUES 
-	('Domingo','Nikki','N','0917', 'password', TRUE, 'nikki@nikki.com'),
-	('Impuerto','Mars','', '0917','password', FALSE, 'mars@mars.com'),
-	('Salumbides','Katkat','N','0917','password',FALSE, 'kat@kat.com'),
-	('Andan', 'JC', '', '0917','password', FALSE, 'jc@jc.com'),
-	('Natividad', 'Carlo', 'M', '0917','password', FALSE, 'carlo@carlo.com'),
-	('Park', 'Candy', 'H', '0917','password',FALSE, 'candy@candy.com'),
-	('Bermejo', 'Irene', 'Y', '0917', 'password', FALSE, 'irene@irene.com');
+-- INSERT INTO users (last_name, first_name, middle_initial, mobile_number, password, is_admin, email)
+-- VALUES 
+-- 	('Domingo','Nikki','N','0917', 'password', TRUE, 'nikki@nikki.com'),
+-- 	('Impuerto','Mars','', '0917','password', FALSE, 'mars@mars.com'),
+-- 	('Salumbides','Katkat','N','0917','password',FALSE, 'kat@kat.com'),
+-- 	('Andan', 'JC', '', '0917','password', FALSE, 'jc@jc.com'),
+-- 	('Natividad', 'Carlo', 'M', '0917','password', FALSE, 'carlo@carlo.com'),
+-- 	('Park', 'Candy', 'H', '0917','password',FALSE, 'candy@candy.com'),
+-- 	('Bermejo', 'Irene', 'Y', '0917', 'password', FALSE, 'irene@irene.com');
 
 DROP TABLE IF EXISTS loyolaschools;
 CREATE TABLE loyolaschools(

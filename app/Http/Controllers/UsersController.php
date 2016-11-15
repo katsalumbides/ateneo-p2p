@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use DB;
+use Auth;
 use App\User;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -17,9 +18,4 @@ class UsersController extends Controller
     	return view('users.index', compact('users'));
     }
 
-    public function show(User $user)
-    {
-
-    	return view('users.show', compact('user'));
-    }
 }
