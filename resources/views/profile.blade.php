@@ -17,37 +17,29 @@
                 <!-- Lists all the reservations of a user -->
                 <ul class ="list-group">
                 @foreach ($user->reservations as $reservation)
+                    <li class="list-group-item">
+                        <?php $schedule = $reservation->slot->schedule ?>
 
-                    <li class="list-group-item"> 
-                    <!-- Comment -->
-                    {{$reservation -> comment}} <br>
+                        {{$schedule->location->name}}<br>
+                        {{$schedule->timeslot->time_slot}}
+                        @if ($schedule->location->trip_type == 0)
+                            AM
+                        @else
+                            PM
+                        @endif
 
-                    <!-- Dropoff/Pickup Details -->
-                    <?php $location = $reservation -> slot -> location -> name ?>
+                        <!-- Delete Button -->
+                        <form method="get" action="profile/{{$reservation->id}}">
+                            <!-- {{ method_field('DELETE') }} -->
 
-                    @if ($reservation -> slot -> is_pickup == TRUE)
-                        From Ateneo to <b>{{ $location }}</b>
-                    @elseif ($reservation -> slot -> is_dropoff == TRUE)
-                        From <b>{{ $location }}</b> to Ateneo
-                    @endif
-                    <br>
-
-                    <!-- Time slot -->
-                    {{$reservation -> slot -> timeslot -> time_slot}}
-
-                    <!-- Delete Button -->
-                    <form method="get" action="profile/{{$reservation->id}}">
-                        <!-- {{ method_field('DELETE') }} -->
-
-                        <div class="form-group">
-                            <!-- <textarea class="form-control" name="delete"></textarea> -->
-                            <button type="submit" class="btn btn-primary">Delete</button>
-                        </div>
-                    </form>
-                </li>       
-
-            @endforeach
-            </ul>
+                            <div class="form-group">
+                                <!-- <textarea class="form-control" name="delete"></textarea> -->
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </div>
+                        </form>
+                    </li>       
+                @endforeach
+                </ul>
             </div>
         </div>
     </div>

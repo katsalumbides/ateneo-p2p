@@ -12,12 +12,8 @@ class Slot extends Model
     	return $this->hasMany(Reservation::class);
     }
 
-    public function timeslot(){
-    	return $this->belongsTo(TimeSlot::class);
-    }
-
-    public function location(){
-    	return $this->belongsTo(Location::class);
+    public function schedule(){
+        return $this->belongsTo(Schedule::class);
     }
 
 }

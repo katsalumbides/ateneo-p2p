@@ -156,6 +156,18 @@ VALUES
 	(4, 6),
 	(5, 6);
 
+INSERT INTO slots(schedule_id)
+VALUES
+	(1),
+	(2),
+	(11);
+
+INSERT INTO reservations(user_id, slot_id)
+VALUES
+	(1,1),
+	(1,2),
+	(1,3);
+
 INSERT INTO announcements(title, content)
 VALUES
 	("Reminders on Trip Reservation", "Please text us not later than 3:00 PM. Beyond 
@@ -172,8 +184,3 @@ VALUES
 	("LS/Employees/University Affiliates", '+63 928 8235 816'),
 	("LS/Employees/University Affiliates", '+63 928 8235 827');
 
--- INSERT INTO reservations(user_id, slot_id, comment, num_of_passengers)
--- VALUES
--- 	(2,1,"Mars' Reservation #1", 1),
--- 	(2,2,"Mars' Reservations #2", 1),
--- 	(3,2,"Katkat's Reservation #1", 2);
