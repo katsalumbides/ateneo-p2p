@@ -15,7 +15,7 @@
                 @endif
 
                 <!-- Lists all the reservations of a user -->
-                <ul class ="list=group">
+                <ul class ="list-group">
                 @foreach ($user->reservations as $reservation)
 
                     <li class="list-group-item"> 

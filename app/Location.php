@@ -8,7 +8,8 @@ class Location extends Model
 {
 	public $timestamps = false;
 
-    public function slots(){
-    	return $this->hasMany(Slots::class);
-    }
+	public function schedules(){
+		
+		return $this->hasMany(Schedule::class);
+	}
 }

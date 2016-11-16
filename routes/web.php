@@ -15,22 +15,20 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('users', 'UsersController@index');
-
+//Practice routes
+// Route::get('users', 'UsersController@index');
 // Route::get('users/{user}', 'UsersController@show');
 
+//Home and Contact Us
 Route::get('/home', 'HomeController@index');
+Route::get('/contactus', 'ContactsController@index');
 
+//Profile
 Route::get('/profile', 'ReservationsController@show');
-
 Route::get('/profile/{reservation}', 'ReservationsController@delete');
-
 
 //Register Routes
 Auth::routes();
-
 Route::get('/register/faculty', function() { return view('auth.faculty'); });
-
 Route::get('/register/validate', 'Auth\RegisterController@chooseFaculty');
-
 Route::post('/register/{user_type}', 'Auth\RegisterController@validateUser');

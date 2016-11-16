@@ -46,7 +46,7 @@
                         <li><a href="/home" > Home </a></li>
                         <li><a href="/home" > Reserve </a></li>
                         <li><a href="/profile" > Profile </a></li>
-                        <li><a href="/home" > Contact Us </a></li>
+                        <li><a href="/contactus" > Contact Us </a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

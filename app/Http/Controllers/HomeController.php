@@ -2,6 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use DB;
+use App\Announcement;
+use App\Schedule;
+use App\Location;
+use App\Timeslot;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +28,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $announcements = Announcement::all();
+        $locations = Location::all();
+        $schedules = Schedule::all();
+
+        return view('home', compact('announcements', 'schedules', 'locations'));
     }
 }

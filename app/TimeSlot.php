@@ -9,6 +9,10 @@ class Timeslot extends Model
     public $timestamps = false;
 
     public function slots(){
-    	return $this->hasMany(Slots::class);
+    	return $this->hasMany(Slot::class);
+    }
+
+    public function schedules(){
+    	return $this->hasMany(Schedule::class);
     }
 }

@@ -25,13 +25,6 @@ CREATE TABLE loyolaschools(
 	obf_email VARCHAR(255) NOT NULL
 );
 
-INSERT INTO loyolaschools (ls_id_number, obf_email)
-VALUES 
-	('141369', 'jan.domingo@obf.ateneo.edu'),
-	('141370', 'jc.andan@obf.ateneo.edu'),
-	('141371', 'carlo.natividad@obf.ateneo.edu'),
-	('141372', 'anton.suba@obf.ateneo.edu');
-
 DROP TABLE IF EXISTS staffs;
 CREATE TABLE staffs(
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -40,11 +33,6 @@ CREATE TABLE staffs(
 	unit VARCHAR(255),
 	department VARCHAR(255)
 );
-
-INSERT INTO staffs (staff_id_number, ateneo_email)
-VALUES
-	('1234', 'impuerto@ateneo.edu'),
-	('1245', 'salumbides@ateneo.edu');
 
 DROP TABLE IF EXISTS highschools;
 CREATE TABLE highschools(
@@ -57,24 +45,12 @@ CREATE TABLE highschools(
 	guardian_mobile_number VARCHAR(255)
 );
 
-INSERT INTO highschools(hs_id_number, grade_level,section)
-VALUES
-	('00123', '12', 'A'),
-	('00124', '11', 'B');
-
 DROP TABLE IF EXISTS locations;
 CREATE TABLE locations(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	name VARCHAR(255) NOT NULL
+	name VARCHAR(255) NOT NULL,
+	trip_type BOOLEAN
 );
-
-INSERT INTO locations(name)
-VALUES
-	('AJHS / ASHS'),
-	('SM Markina'),
-	('Temple Drive'),
-	('UP TechnoHub'),
-	('LS / Employees');
 
 DROP TABLE IF EXISTS timeslots;
 CREATE TABLE timeslots(
@@ -82,33 +58,25 @@ CREATE TABLE timeslots(
 	time_slot TIME NOT NULL
 );
 
-INSERT INTO timeslots(time_slot)
-VALUES
-	('06:15:00'),
-	('06:45:00'),
-	('07:15:00'),
-	('05:15:00'),
-	('05:45:00');
-
-DROP TABLE IF EXISTS slots;
-CREATE TABLE slots(
+DROP TABLE IF EXISTS schedules;
+CREATE TABLE schedules(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	date_slots DATETIME,
-	location_id INT,	
-	is_pickup BOOLEAN,
-	is_dropoff BOOLEAN,
+	-- trip_type BOOLEAN,
 	timeslot_id INT,
-	num_of_seats INT NOT NULL,
-	status VARCHAR(255),
+	location_id INT,
 	FOREIGN KEY (location_id) REFERENCES locations(id),
 	FOREIGN KEY (timeslot_id) REFERENCES timeslots(id)
 );
 
-INSERT INTO slots (location_id,is_pickup,is_dropoff, timeslot_id,num_of_seats)
-VALUES
-	(1, TRUE, FALSE, 1, 50),
-	(2, FALSE, TRUE, 2, 40),
-	(3, TRUE, FALSE, 1, 30);
+DROP TABLE IF EXISTS slots;
+CREATE TABLE slots(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	schedule_id INT,
+	date_slots DATETIME,
+	num_of_seats INT NOT NULL,
+	status VARCHAR(255),
+	FOREIGN KEY (schedule_id) REFERENCES schedules(id)
+);
 
 DROP TABLE IF EXISTS reservations;
 CREATE TABLE reservations(
@@ -121,12 +89,6 @@ CREATE TABLE reservations(
 	FOREIGN KEY (slot_id) REFERENCES slots(id)
 );
 
--- INSERT INTO reservations(user_id, slot_id, comment, num_of_passengers)
--- VALUES
--- 	(2,1,"Mars' Reservation #1", 1),
--- 	(2,2,"Mars' Reservations #2", 1),
--- 	(3,2,"Katkat's Reservation #1", 2);
-
 DROP TABLE IF EXISTS announcements;
 CREATE TABLE announcements( 
 	id INT PRIMARY KEY AUTO_INCREMENT,
@@ -134,6 +96,65 @@ CREATE TABLE announcements(
 	title VARCHAR(255),
 	content TEXT
 );
+
+DROP TABLE IF EXISTS contacts;
+CREATE TABLE contacts(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	contact_faculty VARCHAR(255),
+	contact_number VARCHAR(255)
+);
+
+-- DUMMY DATA ------------------------------------------------
+
+INSERT INTO loyolaschools (ls_id_number, obf_email)
+VALUES 
+	('141369', 'jan.domingo@obf.ateneo.edu'),
+	('141370', 'jc.andan@obf.ateneo.edu'),
+	('141371', 'carlo.natividad@obf.ateneo.edu'),
+	('141372', 'anton.suba@obf.ateneo.edu');
+
+INSERT INTO staffs (staff_id_number, ateneo_email)
+VALUES
+	('1234', 'impuerto@ateneo.edu'),
+	('1245', 'salumbides@ateneo.edu');
+
+INSERT INTO highschools(hs_id_number, grade_level,section)
+VALUES
+	('00123', '12', 'A'),
+	('00124', '11', 'B');
+
+INSERT INTO locations(trip_type, name)
+VALUES
+	(0, 'SM Markina'),
+	(0, 'Temple Drive'),
+	(0, 'UP TechnoHub'),
+	(0, 'UP Town Center'),
+	(1, 'Northbound'),
+	(1, 'Southbound');
+
+INSERT INTO timeslots(time_slot)
+VALUES
+	('06:15:00'),
+	('06:45:00'),
+	('07:15:00'),
+	('05:15:00'),
+	('05:45:00');
+
+INSERT INTO schedules(timeslot_id, location_id)
+VALUES
+	(1, 1),
+	(2, 1),
+	(3, 1),
+	(1, 2),
+	(2, 2),
+	(3, 2),
+	(1, 3),
+	(2, 3),
+	(3, 4),
+	(4, 5),
+	(5, 5),
+	(4, 6),
+	(5, 6);
 
 INSERT INTO announcements(title, content)
 VALUES
@@ -145,23 +166,14 @@ VALUES
 		Southbound (Temple Drive - Shell Julia Vargas - Market!Market!) trips will 
 		have a new schedule of 5:30 PM. Thank you!");
 
-DROP TABLE IF EXISTS contacts;
-CREATE TABLE contacts(
-	id INT PRIMARY KEY AUTO_INCREMENT,
-	location_id INT,
-	contact_number VARCHAR(255),
-	FOREIGN KEY (location_id) REFERENCES locations(id)
-);
-
-INSERT INTO contacts(location_id, contact_number)
+INSERT INTO contacts(contact_faculty, contact_number)
 VALUES
-	(1, '+63 928 8235 801'),
-	(2, '+63 928 8235 816'),
-	(2, '+63 928 8235 827'),
-	(3, '+63 928 8235 830'),
-	(3, '+63 928 8235 838'),
-	(4, '+63 928 8235 865'),
-	(4, '+63 928 8235 846'),
-	(5, '+63 920 9491 284'),
-	(5, '+63 917 7190 915');
+	("AJHS/ASHS", '+63 928 8235 801'),
+	("LS/Employees/University Affiliates", '+63 928 8235 816'),
+	("LS/Employees/University Affiliates", '+63 928 8235 827');
 
+-- INSERT INTO reservations(user_id, slot_id, comment, num_of_passengers)
+-- VALUES
+-- 	(2,1,"Mars' Reservation #1", 1),
+-- 	(2,2,"Mars' Reservations #2", 1),
+-- 	(3,2,"Katkat's Reservation #1", 2);
