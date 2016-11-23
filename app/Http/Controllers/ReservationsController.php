@@ -24,4 +24,16 @@ class ReservationsController extends Controller
 
     	return back();
     }
+
+    public function reserve()
+    {
+        return view('reserve');
+    }
+
+    public function selectTripType()
+    {
+        $locations =  Location::where('trip_type', $request->trip_type)->first();
+
+        return Response::json($locations);
+    }
 }

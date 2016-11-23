@@ -27,6 +27,10 @@ Route::get('/contactus', 'ContactsController@index');
 Route::get('/profile', 'ReservationsController@show');
 Route::get('/profile/{reservation}', 'ReservationsController@delete');
 
+//Reservation
+Route::get('/reserve', 'ReservationsController@reserve');
+Route::post('/reserve', 'ReservationsController@selectTripType');
+
 //Register Routes
 Auth::routes();
 Route::get('/register/faculty', function() { return view('auth.faculty'); });

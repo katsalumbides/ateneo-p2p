@@ -44,7 +44,7 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="/home" > Home </a></li>
-                        <li><a href="/home" > Reserve </a></li>
+                        <li><a href="/reserve" > Reserve </a></li>
                         <li><a href="/profile" > Profile </a></li>
                         <li><a href="/contactus" > Contact Us </a></li>
                     </ul>
@@ -86,5 +86,10 @@
 
     <!-- Scripts -->
     <script src="/js/app.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
+    </script>
 </body>
 </html>
