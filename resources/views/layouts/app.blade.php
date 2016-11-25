@@ -43,19 +43,25 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="/home" > Home </a></li>
-                        <li><a href="/reserve" > Reserve </a></li>
-                        <li><a href="/profile" > Profile </a></li>
-                        <li><a href="/contactus" > Contact Us </a></li>
+                        @if(Auth::check())
+                            @if (Auth::user()->is_admin == 1)
+                                <li><a href="/admin/home" > Home </a></li>
+                                <li><a href="/admin/reservations" > Reservations </a></li>
+                                <li><a href="/admin/schedules" > Schedules </a></li>
+                                <li><a href="/admin/editcontacts" > Contact </a></li>
+                            @else
+                                <li><a href="/home" > Home </a></li>
+                                <li><a href="/reserve" > Reserve </a></li>
+                                <li><a href="/profile" > Profile </a></li>
+                                <li><a href="/contactus" > Contact Us </a></li>
+                            @endif
+                        @endif
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ url('/login') }}">Login</a></li>
-                            <li><a href="{{ url('/register/faculty') }}">Register</a></li>
-                        @else
+                        @if (Auth::check())
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->first_name }} {{Auth::user()->last_name}} <span class="caret"></span>

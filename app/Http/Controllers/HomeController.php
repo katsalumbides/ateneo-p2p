@@ -8,6 +8,7 @@ use App\Schedule;
 use App\Location;
 use App\Timeslot;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -32,6 +33,13 @@ class HomeController extends Controller
         $locations = Location::all();
         $schedules = Schedule::all();
 
-        return view('home', compact('announcements', 'schedules', 'locations'));
+        if (Auth::user()->is_admin == 1){
+
+              return view('admin.home', compact('announcements', 'schedules', 'locations'));
+
+        } else {
+
+            return view('home', compact('announcements', 'schedules', 'locations'));
+        }
     }
 }

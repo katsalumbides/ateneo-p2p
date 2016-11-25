@@ -21,29 +21,24 @@
 						<div class="form-group row">
 	                		<label for="trip_type" class="col-md-4 control-label">Trip Type</label>
 	                		<div class="col-md-6 radio">
-                                <label><input id="trip_type" type="radio" value="0" name="trip_type" required autofocus> To Ateneo (Morning) </label> <br>
-                                <label><input id="trip_type" type="radio" value="1" name="trip_type" required autofocus> From Ateneo (Afternoon) </label> <br>
+                                <label><input id="trip_type" onchange="changeTripType()" type="radio" value="0" name="trip_type" required autofocus > To Ateneo (Morning) </label> <br>
+                                <label><input id="trip_type" onchange="changeTripType()" type="radio" value="1" name="trip_type" required autofocus > From Ateneo (Afternoon) </label> 
+                                <br>
                             </div>
 						</div>
 
 						<div class="form-group row">
 	                		<label for="location" class="col-md-4 control-label">Locations</label>
 	                		<div class="col-md-6 radio">
-		                		<select class="form-control" id="location">
-		                			<option>Please choose a location</option>
+		                		<select class="form-control" id="location" onchange="changeLocation()"">
 							    </select>	
 						    </div>
 						</div>
 
 						<div class="form-group row">
-	                		<label for="schedule" class="col-md-4 control-label">Available Time Slots</label>
+	                		<label for="timeslot" class="col-md-4 control-label">Available Time Slots</label>
 	                		<div class="col-md-6 radio">
-		                		<select class="form-control" id="schedule">
-		                			<option>1</option>
-							      	<option>2</option>
-							     	<option>3</option>
-							      	<option>4</option>
-							      	<option>5</option>
+		                		<select class="form-control" id="timeslot">
 							    </select>	
 						    </div>
 						</div>
@@ -71,28 +66,58 @@
 
 <script
 	src="https://code.jquery.com/jquery-3.1.1.min.js"
-	  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	  crossorigin="anonymous"></script>
+	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+	crossorigin="anonymous">
+</script>
 
 <script type="text/javascript">
-	function changeQuantity(){
-		var trip_type = $('#trip_type').val();
+	function changeTripType(){
+		var trip_type = $('#trip_type:checked').val();
 		$.ajax({
-			type: "POST",
-			url: "/reserve",
+			type: "get",
+			url: "/reserve/trip_type/" + trip_type,
 			data: trip_type,
 			cache: false,
-			dataType: 'json',
 			success: function(data){
-				for ( i in $locations ){
-					var option = $('<option></option>').attr("value", i).text(i); //<option value="i">i</option>
+				$("input[id=location]").attr('disabled', false);
+				$('#location').empty()
+				for ( var i in data.locations ){
+					var location_name = (data.locations)[i].name;
+					var locationID = (data.locations)[i].id;
+					console.log(locationID);
+					var option = $('<option></option>').attr("value", locationID).text(location_name); //<option value="i">i</>
+					// .attr("onchange","changeLocation()")
 					$('#location').append(option);
 				}
-			}
+			},
 		});
 	}
 
-	window.changeQuantity();
+	function changeLocation(){
+		var location = $('#location option:selected').val();
+		console.log(location);
+		$.ajax({
+			type: "get",
+			url: "/reserve/location/" + location,
+			data: location,
+			cache: false,
+			success: function(data){
+				console.log("success")
+				$("input[id=timeslot]").attr('disabled', false);
+				$('#timeslot').empty()
+				for ( var i in data.timeslots ){
+					console.log("loops")
+					var time = (data.timeslots)[i].time_slot;
+					var timeslotID = (data.timeslots)[i].id;
+					var option = $('<option></option>').attr("value", timeslotID).text(time); //<option value="i">i</>
+					$('#timeslot').append(option);
+				}
+			}
+
+		});
+
+
+	}
 </script>
 
 @endsection

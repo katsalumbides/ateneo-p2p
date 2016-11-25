@@ -162,11 +162,18 @@ VALUES
 	(2),
 	(11);
 
-INSERT INTO reservations(user_id, slot_id)
-VALUES
-	(1,1),
-	(1,2),
-	(1,3);
+-- INSERT INTO reservations(user_id, slot_id)
+-- VALUES
+-- 	(1,1),
+-- 	(1,2),
+-- 	(1,3);
+
+-- INSERT INTO reservations(user_id, slot_id)
+-- VALUES
+-- 	(2,3),
+-- 	(2,2),
+-- 	(2,1);
+
 
 INSERT INTO announcements(title, content)
 VALUES
@@ -183,4 +190,8 @@ VALUES
 	("AJHS/ASHS", '+63 928 8235 801'),
 	("LS/Employees/University Affiliates", '+63 928 8235 816'),
 	("LS/Employees/University Affiliates", '+63 928 8235 827');
+
+-- UPDATE users
+-- SET is_admin=1
+-- WHERE id = 2;
 

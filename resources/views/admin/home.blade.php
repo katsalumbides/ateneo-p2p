@@ -4,7 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-        <h1>Welcome!</h1>
+        <h1>Admin</h1>
             <div class="panel panel-default">
                 <div class="panel-heading"><h2>Announcements</h2></div>
  
@@ -13,13 +13,29 @@
                        <h3> {{ $announcement->title }} </h3> <br>
                        <!-- need to add time and date here -->
                        {{ $announcement->content }} <br>
+                       <!-- Delete Button -->
+                        <form method="get" action="admin/home/{{$announcement->id}}">
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Delete</button>
+                            </div>
+                        </form>
                        <hr>
                     @endforeach
                 </div>
+
             </div>
 
             <div class="panel panel-default">
-                <div class="panel-heading"><h2>Schedules</h2></div>
+                <div class="panel-heading">
+                    <h2>Schedules</h2>
+                    <form method="get" action="admin/home/{{$announcement->id}}">
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary" >Edit Schedules</button>
+                            </div>
+                        </form>
+                </div>
 
                 <div class="panel-body">
 
@@ -49,7 +65,6 @@
                                 {{$schedule -> timeslot -> time_slot }} <br>
                             @endforeach
                             <br>
-
                         @endif
 
                     @endforeach

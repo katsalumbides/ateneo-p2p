@@ -29,10 +29,17 @@ Route::get('/profile/{reservation}', 'ReservationsController@delete');
 
 //Reservation
 Route::get('/reserve', 'ReservationsController@reserve');
-Route::post('/reserve', 'ReservationsController@selectTripType');
+Route::get('/reserve/trip_type/{trip_type}', 'ReservationsController@selectTripType');
+Route::get('/reserve/location/{location}', 'ReservationsController@selectLocation');
 
 //Register Routes
 Auth::routes();
 Route::get('/register/faculty', function() { return view('auth.faculty'); });
 Route::get('/register/validate', 'Auth\RegisterController@chooseFaculty');
 Route::post('/register/{user_type}', 'Auth\RegisterController@validateUser');
+
+//Admin Routes
+Route::get('/admin/home', 'HomeController@index') -> middleware('admin');
+Route::get('/admin/reservations', 'HomeController@index') -> middleware('admin');
+Route::get('/admin/schedules', 'HomeController@index') -> middleware('admin');
+Route::get('/admin/editcontacts', 'HomeController@index') -> middleware('admin');

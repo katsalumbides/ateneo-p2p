@@ -45,7 +45,7 @@
                             <label for="middle_initial" class="col-md-4 control-label">Middle Initial</label>
 
                             <div class="col-md-6">
-                                <input id="middle_initial" type="text" class="form-control" name="middle_initial" value="{{ old('middle_initial') }}" required autofocus>
+                                <input id="middle_initial" type="text" class="form-control" name="middle_initial" value="{{ old('middle_initial') }}">
 
                                 @if ($errors->has('middle_initial'))
                                     <span class="help-block">
