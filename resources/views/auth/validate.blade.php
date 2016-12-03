@@ -16,7 +16,7 @@
         @endif
 
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading"><center> Validate your credentials. </center></div>
                 <div class="panel-body">
                 @if($user_type == 0)  <!-- FOR HIGH SCHOOL -->
                     <form class="form-horizontal" role="form" method="POST" action="/register/{{$user_type}}">

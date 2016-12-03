@@ -40,6 +40,9 @@ Route::post('/register/{user_type}', 'Auth\RegisterController@validateUser');
 
 //Admin Routes
 Route::get('/admin/home', 'HomeController@index') -> middleware('admin');
+Route::get('/admin/home/announcement', 'AnnouncementsController@add') -> middleware('admin');
+Route::get('/admin/home/{announcement}', 'AnnouncementsController@delete') -> middleware('admin');
+
 Route::get('/admin/reservations', 'HomeController@index') -> middleware('admin');
 Route::get('/admin/schedules', 'HomeController@index') -> middleware('admin');
 Route::get('/admin/editcontacts', 'HomeController@index') -> middleware('admin');

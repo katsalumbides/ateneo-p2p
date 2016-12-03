@@ -71,6 +71,10 @@
 </script>
 
 <script type="text/javascript">
+	$(function () {
+        $('#datetimepicker1').datetimepicker();
+    });
+
 	function changeTripType(){
 		var trip_type = $('#trip_type:checked').val();
 		$.ajax({
@@ -115,8 +119,6 @@
 			}
 
 		});
-
-
 	}
 </script>
 
@@ -130,4 +132,12 @@
 	https://scotch.io/tutorials/submitting-ajax-forms-with-jquery
 	https://laracasts.com/discuss/channels/tips/crud-laravel-without-refresh-page
 	https://laracast.blogspot.com/2016/06/laravel-ajax-crud-search-sort-and.html
+ -->
+
+<!-- 
+	implement calendar that can choose multiple dates 	http://multidatespickr.sourceforge.net/
+	get all slots from that day
+	display available morning slots in radio
+	display available afternoon slots in radio
+	reserve
  -->

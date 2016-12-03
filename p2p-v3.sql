@@ -92,7 +92,8 @@ CREATE TABLE reservations(
 DROP TABLE IF EXISTS announcements;
 CREATE TABLE announcements( 
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	created_at timestamp NULL,
+	created_at DATETIME NULL,
+	updated_at DATETIME NULL,
 	title VARCHAR(255),
 	content TEXT
 );
@@ -167,13 +168,6 @@ VALUES
 -- 	(1,1),
 -- 	(1,2),
 -- 	(1,3);
-
--- INSERT INTO reservations(user_id, slot_id)
--- VALUES
--- 	(2,3),
--- 	(2,2),
--- 	(2,1);
-
 
 INSERT INTO announcements(title, content)
 VALUES

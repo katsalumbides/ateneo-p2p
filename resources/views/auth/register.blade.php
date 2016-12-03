@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="panel panel-default">
-                <div class="panel-heading">Register</div>
+                <div class="panel-heading"><center> Complete your registration. </center></div>
                 <div class="panel-body">
                     <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
                         {{ csrf_field() }}
@@ -83,19 +83,6 @@
                             </div>
                         </div>
 
-                        <!-- <hr> -->
-
-                        <!-- put all things here regarding -->
-                      <!--   @if($user_type == 0)
-                            ahs af
-                        @elseif($user_type == 1)
-                            ls af
-                        @elseif($user_type == 2)
-                            staff af
-                        @endif
-
-                        <hr> -->
-
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
                             <label for="password" class="col-md-4 control-label">Password</label>
 
@@ -139,5 +126,3 @@
 </div>
 
 @endsection
-
-<!-- find a way to pass into parameters the user_type -->
