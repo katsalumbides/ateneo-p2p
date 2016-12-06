@@ -12,6 +12,9 @@
 
     <!-- Styles -->
     <link href="/css/app.css" rel="stylesheet">
+    <!-- <link href="/css/datepicker.css" rel="stylesheet"> -->
+    <link href="/css/bootstrap-datepicker3.css" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.2/themes/smoothness/jquery-ui.css">
 
     <!-- Scripts -->
     <script>
@@ -97,5 +100,9 @@
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous">
     </script>
+    <script src="/js/bootstrap-datepicker.js"></script>
+    <script src="//code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
+
+    @yield('script')
 </body>
 </html>

@@ -14,31 +14,22 @@
 	                	<div class="form-group row">
 	                		<label for="date_slots" class="col-md-4 control-label">Date</label>
 	                		<div class="col-md-6">
-						    	<input id="date_slots" type="date" class="form-control" name="date_slots" required autofocus>
+						    	<input id="date_slots" class="form-control date hint" name="date_slots" value="You can select multiple dates." required autofocus>
 						  	</div>
 						</div>
 
 						<div class="form-group row">
-	                		<label for="trip_type" class="col-md-4 control-label">Trip Type</label>
+	                		<label for="morning_schedule" class="col-md-4 control-label">Morning Schedules</label>
 	                		<div class="col-md-6 radio">
-                                <label><input id="trip_type" onchange="changeTripType()" type="radio" value="0" name="trip_type" required autofocus > To Ateneo (Morning) </label> <br>
-                                <label><input id="trip_type" onchange="changeTripType()" type="radio" value="1" name="trip_type" required autofocus > From Ateneo (Afternoon) </label> 
-                                <br>
-                            </div>
-						</div>
-
-						<div class="form-group row">
-	                		<label for="location" class="col-md-4 control-label">Locations</label>
-	                		<div class="col-md-6 radio">
-		                		<select class="form-control" id="location" onchange="changeLocation()"">
+		                		<select class="form-control" id="morning_schedule">
 							    </select>	
 						    </div>
 						</div>
 
 						<div class="form-group row">
-	                		<label for="timeslot" class="col-md-4 control-label">Available Time Slots</label>
+	                		<label for="afternoon_schedule" class="col-md-4 control-label">Afternoon Schedules</label>
 	                		<div class="col-md-6 radio">
-		                		<select class="form-control" id="timeslot">
+		                		<select class="form-control" id="afternoon_schedule">
 							    </select>	
 						    </div>
 						</div>
@@ -65,15 +56,22 @@
 </div>
 
 <script
-	src="https://code.jquery.com/jquery-3.1.1.min.js"
-	integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-	crossorigin="anonymous">
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous">
 </script>
+<script src="/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 
 <script type="text/javascript">
-	$(function () {
-        $('#datetimepicker1').datetimepicker();
-    });
+
+	$('#date_slots').datepicker({
+	   	multidate: true,
+    	daysOfWeekDisabled: "0,6",
+    	startDate:"0",
+    	endDate: "+7d",
+    	clearBtn: "true"
+	});
 
 	function changeTripType(){
 		var trip_type = $('#trip_type:checked').val();
@@ -90,34 +88,9 @@
 					var locationID = (data.locations)[i].id;
 					console.log(locationID);
 					var option = $('<option></option>').attr("value", locationID).text(location_name); //<option value="i">i</>
-					// .attr("onchange","changeLocation()")
 					$('#location').append(option);
 				}
 			},
-		});
-	}
-
-	function changeLocation(){
-		var location = $('#location option:selected').val();
-		console.log(location);
-		$.ajax({
-			type: "get",
-			url: "/reserve/location/" + location,
-			data: location,
-			cache: false,
-			success: function(data){
-				console.log("success")
-				$("input[id=timeslot]").attr('disabled', false);
-				$('#timeslot').empty()
-				for ( var i in data.timeslots ){
-					console.log("loops")
-					var time = (data.timeslots)[i].time_slot;
-					var timeslotID = (data.timeslots)[i].id;
-					var option = $('<option></option>').attr("value", timeslotID).text(time); //<option value="i">i</>
-					$('#timeslot').append(option);
-				}
-			}
-
 		});
 	}
 </script>

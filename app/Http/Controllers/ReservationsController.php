@@ -28,7 +28,7 @@ class ReservationsController extends Controller
     	return back();
     }
 
-    public function reserve()
+    public function view()
     {
         return view('reserve');
     }
@@ -49,5 +49,11 @@ class ReservationsController extends Controller
             ->get();
 
         return response()->json(['timeslots' => $timeslots]);
+    }
+
+    public function makeReservation(){
+        // get all the dates -> slots -> schedule_id
+        // display schedule -> location_id -> name
+        // display schedule -> 
     }
 }

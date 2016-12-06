@@ -28,9 +28,10 @@ Route::get('/profile', 'ReservationsController@show');
 Route::get('/profile/{reservation}', 'ReservationsController@delete');
 
 //Reservation
-Route::get('/reserve', 'ReservationsController@reserve');
+Route::get('/reserve', 'ReservationsController@view');
 Route::get('/reserve/trip_type/{trip_type}', 'ReservationsController@selectTripType');
 Route::get('/reserve/location/{location}', 'ReservationsController@selectLocation');
+Route::post('/reserve', 'ReservationsController@makeReservation');
 
 //Register Routes
 Auth::routes();

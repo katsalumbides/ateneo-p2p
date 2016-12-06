@@ -38,9 +38,8 @@
  
                 <div class="panel-body">
                     @foreach ($announcements as $announcement)
-                       <h3> {{ $announcement->title }} </h3> <br>
-                       
-                       {{ $announcement -> created_at}} <br>
+                       <h3> {{ $announcement->title }} </h3>                        
+                       {{ Carbon\Carbon::parse($announcement->created_at)->format('d m Y') }} <br>
                        {{ $announcement-> content }} <br>
                        
                        <!-- Delete Button -->

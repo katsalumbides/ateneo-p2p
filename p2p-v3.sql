@@ -61,7 +61,6 @@ CREATE TABLE timeslots(
 DROP TABLE IF EXISTS schedules;
 CREATE TABLE schedules(
 	id INT PRIMARY KEY AUTO_INCREMENT,
-	-- trip_type BOOLEAN,
 	timeslot_id INT,
 	location_id INT,
 	FOREIGN KEY (location_id) REFERENCES locations(id),
