@@ -45,5 +45,6 @@ Route::get('/admin/home/announcement', 'AnnouncementsController@add') -> middlew
 Route::get('/admin/home/{announcement}', 'AnnouncementsController@delete') -> middleware('admin');
 
 Route::get('/admin/reservations', 'HomeController@index') -> middleware('admin');
-Route::get('/admin/schedules', 'HomeController@index') -> middleware('admin');
+Route::get('/admin/schedules', 'ScheduleController@view') -> middleware('admin');
+Route::post('/admin/schedules', 'ScheduleController@add') -> middleware('admin');
 Route::get('/admin/editcontacts', 'HomeController@index') -> middleware('admin');

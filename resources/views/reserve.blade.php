@@ -19,12 +19,12 @@
 						</div>
 
 						<div class="form-group row">
-	                		<label for="morning_schedule" class="col-md-4 control-label">Morning Schedules</label>
-	                		<div class="col-md-6 radio">
-		                		<select class="form-control" id="morning_schedule">
-							    </select>	
-						    </div>
-						</div>
+                            <label for="morning_schedule" class="col-md-4 control-label">Morning Schedules</label>
+                            <div class="col-md-6 radio">
+                                <select class="form-control" id="morning_schedule">
+                                </select>   
+                            </div>
+                        </div>
 
 						<div class="form-group row">
 	                		<label for="afternoon_schedule" class="col-md-4 control-label">Afternoon Schedules</label>

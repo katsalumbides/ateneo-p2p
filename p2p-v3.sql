@@ -71,7 +71,7 @@ DROP TABLE IF EXISTS slots;
 CREATE TABLE slots(
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	schedule_id INT,
-	date_slots DATETIME,
+	date_slots DATE,
 	num_of_seats INT NOT NULL,
 	status VARCHAR(255),
 	FOREIGN KEY (schedule_id) REFERENCES schedules(id)
